@@ -1,2 +1,10 @@
-//This is just a test by Goris.
-// This is a test by kaveh Ghodstinat
+#define LEFT_SIDE	0
+#define RIGHT_SIDE	1
+
+class Bridge
+{
+public:
+	Bridge();
+	~Bridge();
+};
+
