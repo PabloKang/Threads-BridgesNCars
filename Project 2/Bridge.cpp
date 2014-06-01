@@ -16,6 +16,7 @@ Bridge::Bridge()
 	else {
 		inFile >> carCount;
 
+		// Fill both Queues with threads of OneVehicle, passed car information from input file.
 		for (int i = 0; i < carCount; i++){
 			int carID;
 			int carDir;
