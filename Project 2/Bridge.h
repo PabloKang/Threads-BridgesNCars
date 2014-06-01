@@ -1,16 +1,40 @@
+#include <string>
 #include <queue>
 #include <vector>
+#include <iostream>
+#include <fstream>
 #include <thread>
+
+
+using namespace std;
 
 
 #define LEFT_SIDE	0
 #define RIGHT_SIDE	1
 
 
+// Parameters to the OneVehicle function
+struct func_params
+{
+	int carID;			// ID of car.
+	int direction;		// Intended destination (LEFT_SIDE / RIGHT_SIDE) of car.
+
+	// Struct Constructor
+	func_params(int id, int dir)
+	{
+		carID = id;
+		direction = dir;
+	}
+};
+
+
 class Bridge
 {
-	std::queue<std::thread> leftCarQueue;
-	std::queue<std::thread> rightCarQueue;
+	int trafficDirection;					// Current direction of traffic flow.
+	int carCount;							// Number of cars in the input file.
+
+	queue<thread> travelingLeftQueue;		// Queue of vehicle threads traveling from right to left.
+	queue<thread> travelingRightQueue;		// Queue of vehicle threads traveling from left to right.
 
 public:
 	// Constructor
