@@ -79,11 +79,9 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClInclude Include="Bridge.h" />
-    <ClInclude Include="Vehicle.h" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Bridge.cpp" />
-    <ClCompile Include="Vehicle.cpp" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
