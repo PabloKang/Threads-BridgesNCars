@@ -23,14 +23,17 @@ Bridge::Bridge()
 
 			inFile >> carID;
 			inFile >> carDir;
-			
-			func_params carData = func_params(carID, carDir);
+
+			pthread_t carThread;
+			func_params* carData = new func_params(carID, carDir);
+
+			pthread_create(&carThread, NULL, OneVehicle, (void*)carData);
 
 			if (carDir == LEFT_SIDE) {
-				travelingLeftQueue.push(thread(OneVehicle, carData));
+				travelingLeftQueue.push(carThread);
 			}
 			else if (carDir == RIGHT_SIDE) {
-				travelingRightQueue.push(thread(OneVehicle, carData));
+				travelingRightQueue.push(carThread);
 			}
 			else {
 				cout << "ERROR >> Invalid direction of travel across bridge.\n";
@@ -47,26 +50,29 @@ Bridge::~Bridge()
 }
 
 
-void Bridge::OneVehicle(int id, int direc){
-	ArriveBridge(id, direc);
-	CrossBridge(id, direc);
-	ExitBridge(id, direc);
+
+
+// VEHICLE FUNCTIONS ///////////////////////////////////////////////////////////////////////////////
+
+
+void* OneVehicle(void* params){
+	func_params* p = (func_params*) params;
+	ArriveBridge(p->carID, p->direction);
+	CrossBridge(p->carID, p->direction);
+	ExitBridge(p->carID, p->direction);
 }
 
-
-void Bridge::ArriveBridge(int id, int direc)
+void ArriveBridge(int id, int direc)
 {
 
 }
 
-
-void Bridge::CrossBridge(int id, int direc)
+void CrossBridge(int id, int direc)
 {
 
 }
 
-
-void Bridge::ExitBridge(int id, int direc)
+void ExitBridge(int id, int direc)
 {
 
 }
