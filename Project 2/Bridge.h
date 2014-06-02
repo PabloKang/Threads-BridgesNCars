@@ -31,13 +31,17 @@ struct func_params
 
 class Bridge
 {
-	int trafficDirection;					// Current direction of traffic flow.
-	int carCount;							// Number of cars in the input file.
+public:
+	int trafficDirection;						// Current direction of traffic flow.
+	int carCount;								// Number of cars in the input file.
+	int traveler;								// Dynamic array of current travelers across bridge.
+
+	int CAR_CAPACITY = 3;						// Max cars the bridge can support at any given time.
 
 	queue<pthread_t> travelingLeftQueue;		// Queue of vehicle threads traveling from right to left.
 	queue<pthread_t> travelingRightQueue;		// Queue of vehicle threads traveling from left to right.
 
-public:
+
 	// Constructor
 	Bridge();
 	// Deconstructor
