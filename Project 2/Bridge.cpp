@@ -63,9 +63,8 @@ struct car_thread
 class Bridge
 {
 public:
-	int trafficDirection;						// Current direction of traffic flow.
 	int carCount;								// Number of cars in the input file.
-	unsigned int BRIDGE_CAPACITY = 1;			// Max cars the bridge can support at any given time.
+	unsigned int BRIDGE_CAPACITY = 3;			// Max cars the bridge can support at any given time.
 
 	queue<vehicle> left_queue;					// Queue of vehicles waiting to cross bridge to the left side.
 	queue<vehicle> right_queue;					// Queue of vehicles waiting to cross bridge to the right side.
@@ -74,7 +73,11 @@ public:
 
 
 	// Constructor
-	Bridge() {}
+	Bridge()
+	{
+		carCount = 0;
+		BRIDGE_CAPACITY = 3;
+	}
 	// Deconstructor
 	~Bridge() {}
 
@@ -147,9 +150,9 @@ void ArriveBridge(int id, int direc)
 	pthread_mutex_unlock(&LOCK);
 
 	while (bridge.car_threads[id - 1].waiting){
-		//pthread_mutex_lock(&LOCK);
-		//outFile << "|   o }= ={     | WAITING  : Vehicle " << id << ", traveling in direction " << direc << ".\n";
-		//pthread_mutex_unlock(&LOCK);
+		pthread_mutex_lock(&LOCK);
+		outFile << "|   o }= ={     | WAITING  : Vehicle " << id << ", traveling in direction " << direc << ".\n";
+		pthread_mutex_unlock(&LOCK);
 	}
 }
 

@@ -1,125 +1,40 @@
 | o-> }= ={     | ARRIVAL  : Vehicle 1, traveling in direction 0.
-|   o }= ={     | WAITING  : Vehicle 1, traveling in direction 0.
-|   o }= ={     | WAITING  : Vehicle 1, traveling in direction 0.
-|   o }= ={     | WAITING  : Vehicle 1, traveling in direction 0.
-|   o }= ={     | WAITING  : Vehicle 1, traveling in direction 0.
-|   o }= ={     | WAITING  : Vehicle 1, traveling in direction 0.
-|   o }= ={     | WAITING  : Vehicle 1, traveling in direction 0.
-|   o }= ={     | WAITING  : Vehicle 1, traveling in direction 0.
-|   o }= ={     | WAITING  : Vehicle 1, traveling in direction 0.
-|   o }= ={     | WAITING  : Vehicle 1, traveling in direction 0.
-|   o }= ={     | WAITING  : Vehicle 1, traveling in direction 0.
-|   o }= ={     | WAITING  : Vehicle 1, traveling in direction 0.
-|   o }= ={     | WAITING  : Vehicle 1, traveling in direction 0.
-|   o }= ={     | WAITING  : Vehicle 1, traveling in direction 0.
-|   o }= ={     | WAITING  : Vehicle 1, traveling in direction 0.
-|   o }= ={     | WAITING  : Vehicle 1, traveling in direction 0.
-|   o }= ={     | WAITING  : Vehicle 1, traveling in direction 0.
-|   o }= ={     | WAITING  : Vehicle 1, traveling in direction 0.
-|   o }= ={     | WAITING  : Vehicle 1, traveling in direction 0.
-|   o }= ={     | WAITING  : Vehicle 1, traveling in direction 0.
-|   o }= ={     | WAITING  : Vehicle 1, traveling in direction 0.
-|   o }= ={     | WAITING  : Vehicle 1, traveling in direction 0.
-|   o }= ={     | WAITING  : Vehicle 1, traveling in direction 0.
-|   o }= ={     | WAITING  : Vehicle 1, traveling in direction 0.
-|   o }= ={     | WAITING  : Vehicle 1, traveling in direction 0.
-|   o }= ={     | WAITING  : Vehicle 1, traveling in direction 0.
-|   o }= ={     | WAITING  : Vehicle 1, traveling in direction 0.
-|   o }= ={     | WAITING  : Vehicle 1, traveling in direction 0.
-| o-> }= ={     | ARRIVAL  : Vehicle 10, traveling in direction 0.
-|   o }= ={     | WAITING  : Vehicle 10, traveling in direction 0.
-|   o }= ={     | WAITING  : Vehicle 10, traveling in direction 0.
-|   o }= ={     | WAITING  : Vehicle 10, traveling in direction 0.
-|   o }= ={     | WAITING  : Vehicle 10, traveling in direction 0.
-|   o }= ={     | WAITING  : Vehicle 10, traveling in direction 0.
-|   o }= ={     | WAITING  : Vehicle 10, traveling in direction 0.
-|   o }= ={     | WAITING  : Vehicle 10, traveling in direction 0.
-|   o }= ={     | WAITING  : Vehicle 10, traveling in direction 0.
-|   o }= ={     | WAITING  : Vehicle 10, traveling in direction 0.
-| o-> }= ={     | ARRIVAL  : Vehicle 12, traveling in direction 0.
-|   o }= ={     | WAITING  : Vehicle 12, traveling in direction 0.
-|   o }= ={     | WAITING  : Vehicle 12, traveling in direction 0.
-|   o }= ={     | WAITING  : Vehicle 12, traveling in direction 0.
-|   o }= ={     | WAITING  : Vehicle 12, traveling in direction 0.
-|   o }= ={     | WAITING  : Vehicle 12, traveling in direction 0.
-|   o }= ={     | WAITING  : Vehicle 12, traveling in direction 0.
-|   o }= ={     | WAITING  : Vehicle 12, traveling in direction 0.
-|   o }= ={     | WAITING  : Vehicle 12, traveling in direction 0.
-|   o }= ={     | WAITING  : Vehicle 12, traveling in direction 0.
-|   o }= ={     | WAITING  : Vehicle 12, traveling in direction 0.
-|   o }= ={     | WAITING  : Vehicle 12, traveling in direction 0.
-| o-> }= ={     | ARRIVAL  : Vehicle 4, traveling in direction 0.
-|   o }= ={     | WAITING  : Vehicle 4, traveling in direction 0.
-|   o }= ={     | WAITING  : Vehicle 4, traveling in direction 0.
-|   o }= ={     | WAITING  : Vehicle 4, traveling in direction 0.
-|   o }= ={     | WAITING  : Vehicle 4, traveling in direction 0.
-|   o }= ={     | WAITING  : Vehicle 4, traveling in direction 0.
-|   o }= ={     | WAITING  : Vehicle 4, traveling in direction 0.
-|   o }= ={     | WAITING  : Vehicle 4, traveling in direction 0.
-|   o }= ={     | WAITING  : Vehicle 4, traveling in direction 0.
-|   o }= ={     | WAITING  : Vehicle 4, traveling in direction 0.
-|   o }= ={     | WAITING  : Vehicle 4, traveling in direction 0.
-|   o }= ={     | WAITING  : Vehicle 4, traveling in direction 0.
-|   o }= ={     | WAITING  : Vehicle 4, traveling in direction 0.
-|   o }= ={     | WAITING  : Vehicle 4, traveling in direction 0.
-|   o }= ={     | WAITING  : Vehicle 4, traveling in direction 0.
-|   o }= ={     | WAITING  : Vehicle 4, traveling in direction 0.
-|     }=o={     | CROSSING : Vehicle 4, traveling in direction 0.
-|     }= ={ o-> | DEPATRUE : Vehicle 4, traveling in direction 0.
-| o-> }= ={     | ARRIVAL  : Vehicle 8, traveling in direction 1.
-|     }=o={     | CROSSING : Vehicle 8, traveling in direction 1.
-|     }= ={ o-> | DEPATRUE : Vehicle 8, traveling in direction 1.
-| o-> }= ={     | ARRIVAL  : Vehicle 3, traveling in direction 0.
-|     }=o={     | CROSSING : Vehicle 3, traveling in direction 0.
-|     }= ={ o-> | DEPATRUE : Vehicle 3, traveling in direction 0.
 | o-> }= ={     | ARRIVAL  : Vehicle 2, traveling in direction 1.
+| o-> }= ={     | ARRIVAL  : Vehicle 3, traveling in direction 0.
+| o-> }= ={     | ARRIVAL  : Vehicle 4, traveling in direction 0.
+| o-> }= ={     | ARRIVAL  : Vehicle 5, traveling in direction 0.
+|     }=o={     | CROSSING : Vehicle 1, traveling in direction 0.
 |     }=o={     | CROSSING : Vehicle 2, traveling in direction 1.
-|     }= ={ o-> | DEPATRUE : Vehicle 2, traveling in direction 1.
-| o-> }= ={     | ARRIVAL  : Vehicle 6, traveling in direction 0.
-|     }=o={     | CROSSING : Vehicle 6, traveling in direction 0.
-|     }= ={ o-> | DEPATRUE : Vehicle 6, traveling in direction 0.
-| o-> }= ={     | ARRIVAL  : Vehicle 7, traveling in direction 1.
-|     }=o={     | CROSSING : Vehicle 7, traveling in direction 1.
-|     }= ={ o-> | DEPATRUE : Vehicle 7, traveling in direction 1.
-| o-> }= ={     | ARRIVAL  : Vehicle 9, traveling in direction 1.
-|     }=o={     | CROSSING : Vehicle 9, traveling in direction 1.
-|     }= ={ o-> | DEPATRUE : Vehicle 9, traveling in direction 1.
-|   o }= ={     | WAITING  : Vehicle 10, traveling in direction 0.
-|     }=o={     | CROSSING : Vehicle 10, traveling in direction 0.
-|     }= ={ o-> | DEPATRUE : Vehicle 10, traveling in direction 0.
-| o-> }= ={     | ARRIVAL  : Vehicle 11, traveling in direction 1.
-|     }=o={     | CROSSING : Vehicle 11, traveling in direction 1.
-|     }= ={ o-> | DEPATRUE : Vehicle 11, traveling in direction 1.
-|   o }= ={     | WAITING  : Vehicle 12, traveling in direction 0.
-|     }=o={     | CROSSING : Vehicle 12, traveling in direction 0.
-|     }= ={ o-> | DEPATRUE : Vehicle 12, traveling in direction 0.
-| o-> }= ={     | ARRIVAL  : Vehicle 13, traveling in direction 0.
-|     }=o={     | CROSSING : Vehicle 13, traveling in direction 0.
-|     }= ={ o-> | DEPATRUE : Vehicle 13, traveling in direction 0.
+|     }=o={     | CROSSING : Vehicle 3, traveling in direction 0.
+|     }=o={     | CROSSING : Vehicle 4, traveling in direction 0.
+|     }=o={     | CROSSING : Vehicle 5, traveling in direction 0.
 | o-> }= ={     | ARRIVAL  : Vehicle 14, traveling in direction 1.
 |     }=o={     | CROSSING : Vehicle 14, traveling in direction 1.
-|     }= ={ o-> | DEPATRUE : Vehicle 14, traveling in direction 1.
-| o-> }= ={     | ARRIVAL  : Vehicle 15, traveling in direction 0.
-|     }=o={     | CROSSING : Vehicle 15, traveling in direction 0.
-|     }= ={ o-> | DEPATRUE : Vehicle 15, traveling in direction 0.
-| o-> }= ={     | ARRIVAL  : Vehicle 16, traveling in direction 1.
-|     }=o={     | CROSSING : Vehicle 16, traveling in direction 1.
-|     }= ={ o-> | DEPATRUE : Vehicle 16, traveling in direction 1.
+| o-> }= ={     | ARRIVAL  : Vehicle 6, traveling in direction 0.
+|     }=o={     | CROSSING : Vehicle 6, traveling in direction 0.
 | o-> }= ={     | ARRIVAL  : Vehicle 17, traveling in direction 1.
 |     }=o={     | CROSSING : Vehicle 17, traveling in direction 1.
-|     }= ={ o-> | DEPATRUE : Vehicle 17, traveling in direction 1.
-| o-> }= ={     | ARRIVAL  : Vehicle 18, traveling in direction 1.
-|     }=o={     | CROSSING : Vehicle 18, traveling in direction 1.
-|     }= ={ o-> | DEPATRUE : Vehicle 18, traveling in direction 1.
-| o-> }= ={     | ARRIVAL  : Vehicle 5, traveling in direction 0.
-|     }=o={     | CROSSING : Vehicle 5, traveling in direction 0.
-|     }= ={ o-> | DEPATRUE : Vehicle 5, traveling in direction 0.
-| o-> }= ={     | ARRIVAL  : Vehicle 20, traveling in direction 1.
-|     }=o={     | CROSSING : Vehicle 20, traveling in direction 1.
-|     }= ={ o-> | DEPATRUE : Vehicle 20, traveling in direction 1.
-|   o }= ={     | WAITING  : Vehicle 1, traveling in direction 0.
-|     }=o={     | CROSSING : Vehicle 1, traveling in direction 0.
-|     }= ={ o-> | DEPATRUE : Vehicle 1, traveling in direction 0.
+| o-> }= ={     | ARRIVAL  : Vehicle 13, traveling in direction 0.
+|     }=o={     | CROSSING : Vehicle 13, traveling in direction 0.
+| o-> }= ={     | ARRIVAL  : Vehicle 16, traveling in direction 1.
+|     }=o={     | CROSSING : Vehicle 16, traveling in direction 1.
 | o-> }= ={     | ARRIVAL  : Vehicle 19, traveling in direction 0.
 |     }=o={     | CROSSING : Vehicle 19, traveling in direction 0.
-|     }= ={ o-> | DEPATRUE : Vehicle 19, traveling in direction 0.
+| o-> }= ={     | ARRIVAL  : Vehicle 15, traveling in direction 0.
+|     }=o={     | CROSSING : Vehicle 15, traveling in direction 0.
+| o-> }= ={     | ARRIVAL  : Vehicle 18, traveling in direction 1.
+|     }=o={     | CROSSING : Vehicle 18, traveling in direction 1.
+| o-> }= ={     | ARRIVAL  : Vehicle 12, traveling in direction 0.
+|     }=o={     | CROSSING : Vehicle 12, traveling in direction 0.
+| o-> }= ={     | ARRIVAL  : Vehicle 8, traveling in direction 1.
+|     }=o={     | CROSSING : Vehicle 8, traveling in direction 1.
+| o-> }= ={     | ARRIVAL  : Vehicle 9, traveling in direction 1.
+|     }=o={     | CROSSING : Vehicle 9, traveling in direction 1.
+| o-> }= ={     | ARRIVAL  : Vehicle 10, traveling in direction 0.
+|     }=o={     | CROSSING : Vehicle 10, traveling in direction 0.
+| o-> }= ={     | ARRIVAL  : Vehicle 11, traveling in direction 1.
+|     }=o={     | CROSSING : Vehicle 11, traveling in direction 1.
+| o-> }= ={     | ARRIVAL  : Vehicle 20, traveling in direction 1.
+|     }=o={     | CROSSING : Vehicle 20, traveling in direction 1.
+| o-> }= ={     | ARRIVAL  : Vehicle 7, traveling in direction 1.
+|     }=o={     | CROSSING : Vehicle 7, traveling in direction 1.
