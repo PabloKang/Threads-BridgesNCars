@@ -9,7 +9,7 @@
 using namespace std;
 
 
-#define DEBUG		1
+#define DEBUG		0
 #define LEFT_SIDE	0
 #define RIGHT_SIDE	1
 
@@ -66,7 +66,7 @@ public:
 	{
 		if (!inFile){
 			cout << "ERROR >> File 'bridge.in' was not found or could not be opened.\n" <<
-				"         Unable to load data; exiting simulation...\n\n";
+					"         Unable to load data; exiting simulation...\n\n";
 			exit(0);
 		}
 		else {
@@ -87,7 +87,7 @@ public:
 				else if (carDir == RIGHT_SIDE)
 					right_queue.push(car);
 				else {
-					cout << "ERROR >> Invalid direction of travel across bridge.\n";
+					cout << "\nERROR >> Invalid direction of travel across bridge. Ignoring car.";
 					continue;
 				}
 
@@ -131,10 +131,15 @@ void ArriveBridge(int id, int direc)
 	bool waiting = true;
 	int index = 0;
 
-	//cout << "Vehicle " << id << " has arrived at the bridge, traveling in direction " << direc << endl; ///////////////////////////////////////////////// ???
+	pthread_mutex_lock(&LOCK);
+	if (DEBUG)
+		outFile << "Vehicle " << id << " has arrived at the bridge, traveling in direction " << direc << endl; 
+	pthread_mutex_unlock(&LOCK);
 
 	while (waiting){
-		//cout << "Vehicle " << id << " is waiting to cross the bridge in direction " << direc << endl;
+		//pthread_mutex_lock(&LOCK);
+		//outFile << "Vehicle " << id << " is waiting to cross the bridge in direction " << direc << endl;
+		//pthread_mutex_unlock(&LOCK);
 
 		if (bridge.nextTraveler == id)
 			waiting = false;
@@ -146,23 +151,20 @@ void CrossBridge(int id, int direc)
 {
 	vehicle thisCar(id, direc);
 
-	pthread_mutex_lock(&LOCK);	// lock the carCounter
+	pthread_mutex_lock(&LOCK);
 	bridge.bridge_queue.push(thisCar);
-	pthread_mutex_unlock(&LOCK);	// unclock the carCounter
-
-	//if (DEBUG)
-	//	cout << "DEBUG >> Vehicle " << id << " is crossing the bridge in direction " << direc << endl; ///////////////////////////////////////////////////// ???
+	if (DEBUG)
+		outFile << "DEBUG >> Vehicle " << id << " is crossing the bridge in direction " << direc << endl;
+	pthread_mutex_unlock(&LOCK);
 }
 
 // ExitBridge() - Called when vechicle crosses bridge and performs operations to maintain flow of traffic.
 void ExitBridge(int id, int direc)
 {
-	pthread_mutex_lock(&LOCK);	// lock the current nextTraveler & carCounter
+	pthread_mutex_lock(&LOCK);
 	bridge.bridge_queue.pop();
-	pthread_mutex_unlock(&LOCK);	// unclock the current nextTraveler & carCounter
-
-	if (DEBUG)
-		cout << "\nDEBUG >> Vehicle " << id << " has finished crossing the bridge in direction " << direc << endl;
+	outFile << "DEBUG >> Vehicle " << id << " has finished crossing the bridge in direction " << direc << endl;
+	pthread_mutex_unlock(&LOCK);
 }
 
 
@@ -172,9 +174,10 @@ void ExitBridge(int id, int direc)
 int main(int argc, const char * argv[])
 {
 	bool bridgePause = false;
-	currentDirection = LEFT_SIDE;
+
 
 	bridge.bridgeScenario();
+	currentDirection = LEFT_SIDE;
 
 	while (!(bridge.left_queue.empty() && bridge.right_queue.empty() && bridge.bridge_queue.empty())) {
 		// Check if only one side has exhausted all vehicles or capacity reached.
@@ -207,14 +210,11 @@ int main(int argc, const char * argv[])
 		}
 	}
 
-	system("pause");
-
 	// Join up all completed threads
 	while (!bridge.car_threads.empty()) {
 		(void) pthread_join(bridge.car_threads.back(), NULL);
 		bridge.car_threads.pop_back();
 	}
-	cout << "Goodbye!\n";
 
 	system("pause");
 
