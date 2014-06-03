@@ -146,7 +146,7 @@ void CrossBridge(int id, int direc)
 {
 	vehicle thisCar(id, direc);
 
-	pthread_mutex_trylock(&LOCK);	// lock the carCounter
+	pthread_mutex_lock(&LOCK);	// lock the carCounter
 	bridge.bridge_queue.push(thisCar);
 	pthread_mutex_unlock(&LOCK);	// unclock the carCounter
 
@@ -157,12 +157,12 @@ void CrossBridge(int id, int direc)
 // ExitBridge() - Called when vechicle crosses bridge and performs operations to maintain flow of traffic.
 void ExitBridge(int id, int direc)
 {
-	pthread_mutex_trylock(&LOCK);	// lock the current nextTraveler & carCounter
+	pthread_mutex_lock(&LOCK);	// lock the current nextTraveler & carCounter
 	bridge.bridge_queue.pop();
 	pthread_mutex_unlock(&LOCK);	// unclock the current nextTraveler & carCounter
 
 	if (DEBUG)
-		cout << "DEBUG >> Vehicle " << id << " has finished crossing the bridge in direction " << direc << endl;
+		cout << "\nDEBUG >> Vehicle " << id << " has finished crossing the bridge in direction " << direc << endl;
 }
 
 
