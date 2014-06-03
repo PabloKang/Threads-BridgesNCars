@@ -78,13 +78,13 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
-    <ClInclude Include="Bridge.h" />
-  </ItemGroup>
-  <ItemGroup>
     <ClCompile Include="Bridge.cpp" />
   </ItemGroup>
   <ItemGroup>
-    <Text Include="vehicleInput.txt" />
+    <Text Include="bridge.in" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="bridge.out" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

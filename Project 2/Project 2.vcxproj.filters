@@ -15,16 +15,14 @@
     </Filter>
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="Bridge.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-  </ItemGroup>
-  <ItemGroup>
     <ClCompile Include="Bridge.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
-    <Text Include="vehicleInput.txt" />
+    <Text Include="bridge.in" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="bridge.out" />
   </ItemGroup>
 </Project>
