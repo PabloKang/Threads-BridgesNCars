@@ -1,3 +1,10 @@
+/****************************************************************
+*	TITLE: ICS 53 Project 2 "The Bridge"						*
+*	AUTHORS:	Kaveh Ghodstinat	(83025710)					*
+*				Goris Haghverdian	(48207671)					*
+*				Pablo Kang			(58842064)					*
+*****************************************************************/
+
 #include <string>
 #include <queue>
 #include <vector>
@@ -9,7 +16,7 @@
 using namespace std;
 
 
-#define DEBUG		0
+#define DEBUG		1
 #define LEFT_SIDE	0
 #define RIGHT_SIDE	1
 
@@ -39,22 +46,31 @@ struct vehicle
 };
 
 
+struct car_thread
+{
+	bool waiting;
+	pthread_t car_function;
+
+	car_thread(vehicle* carData)
+	{
+		waiting = true;
+		pthread_create(&car_function, NULL, OneVehicle, (void*)carData);
+	}
+};
+
+
 // BRIDGE CLASS ////////////////////////////////////////////////////////////////////////////////////////////////
 class Bridge
 {
 public:
 	int trafficDirection;						// Current direction of traffic flow.
 	int carCount;								// Number of cars in the input file.
-	int nextTraveler;							// Next car that's allowed to drive onto bridge.
-	unsigned int BRIDGE_CAPACITY = 3;			// Max cars the bridge can support at any given time.
+	unsigned int BRIDGE_CAPACITY = 1;			// Max cars the bridge can support at any given time.
 
 	queue<vehicle> left_queue;					// Queue of vehicles waiting to cross bridge to the left side.
 	queue<vehicle> right_queue;					// Queue of vehicles waiting to cross bridge to the right side.
 	queue<vehicle> bridge_queue;				// Queue of vehicles currently crossing the bridge.
-	
-	vector<pthread_t> car_threads;				// Vector of all running car threads (each thread represents one vehicle.
-	vector<pthread_t>::iterator threadIter;		// Iterator for car threads.
-
+	vector<car_thread> car_threads;				// Vector of all running car threads (each thread represents one vehicle.
 
 
 	// Constructor
@@ -91,17 +107,12 @@ public:
 					continue;
 				}
 
-				pthread_t carThread;
 				vehicle* carData = new vehicle(carID, carDir);
-				pthread_create(&carThread, NULL, OneVehicle, (void*)carData);
+				car_thread carThread(carData);
 
-				threadIter = car_threads.begin();
-				car_threads.insert(threadIter + (carID - 1), carThread);
+				car_threads.insert(car_threads.begin() + (carID - 1), carThread);
 			}
 			inFile.close();
-
-			// Set current nextTraveler on bridge to nobody.
-			nextTraveler = 0;
 		}
 	}
 };
@@ -132,17 +143,13 @@ void ArriveBridge(int id, int direc)
 	int index = 0;
 
 	pthread_mutex_lock(&LOCK);
-	if (DEBUG)
-		outFile << "Vehicle " << id << " has arrived at the bridge, traveling in direction " << direc << endl; 
+	outFile << "| o-> }= ={     | ARRIVAL  : Vehicle " << id << ", traveling in direction " << direc << ".\n";
 	pthread_mutex_unlock(&LOCK);
 
-	while (waiting){
+	while (bridge.car_threads[id - 1].waiting){
 		//pthread_mutex_lock(&LOCK);
-		//outFile << "Vehicle " << id << " is waiting to cross the bridge in direction " << direc << endl;
+		//outFile << "|   o }= ={     | WAITING  : Vehicle " << id << ", traveling in direction " << direc << ".\n";
 		//pthread_mutex_unlock(&LOCK);
-
-		if (bridge.nextTraveler == id)
-			waiting = false;
 	}
 }
 
@@ -154,7 +161,7 @@ void CrossBridge(int id, int direc)
 	pthread_mutex_lock(&LOCK);
 	bridge.bridge_queue.push(thisCar);
 	if (DEBUG)
-		outFile << "DEBUG >> Vehicle " << id << " is crossing the bridge in direction " << direc << endl;
+		outFile << "|     }=o={     | CROSSING : Vehicle " << id << ", traveling in direction " << direc << ".\n";
 	pthread_mutex_unlock(&LOCK);
 }
 
@@ -163,7 +170,7 @@ void ExitBridge(int id, int direc)
 {
 	pthread_mutex_lock(&LOCK);
 	bridge.bridge_queue.pop();
-	outFile << "DEBUG >> Vehicle " << id << " has finished crossing the bridge in direction " << direc << endl;
+	outFile << "|     }= ={ o-> | DEPATRUE : Vehicle " << id << ", traveling in direction " << direc << ".\n";
 	pthread_mutex_unlock(&LOCK);
 }
 
@@ -181,7 +188,7 @@ int main(int argc, const char * argv[])
 
 	while (!(bridge.left_queue.empty() && bridge.right_queue.empty() && bridge.bridge_queue.empty())) {
 		// Check if only one side has exhausted all vehicles or capacity reached.
-		if ((currentDirection == LEFT_SIDE && bridge.left_queue.empty()) || bridge.bridge_queue.size() == bridge.BRIDGE_CAPACITY) { //carCounter == bridge.BRIDGE_CAPACITY)
+		if ((currentDirection == LEFT_SIDE && bridge.left_queue.empty()) || bridge.bridge_queue.size() == bridge.BRIDGE_CAPACITY) {
 			currentDirection = RIGHT_SIDE;
 			bridgePause = true;
 		}
@@ -198,25 +205,26 @@ int main(int argc, const char * argv[])
 
 		// If bridge has room in current direction.
 		if (bridge.bridge_queue.size() < bridge.BRIDGE_CAPACITY) {
+			int nextTraveler = 0;
+			
 			// Get carID of next available nextTraveler.
 			if (currentDirection == LEFT_SIDE) {
-				bridge.nextTraveler = bridge.left_queue.front().carID;
+				nextTraveler = bridge.left_queue.front().carID;
 				bridge.left_queue.pop();
 			}
 			else if (currentDirection == RIGHT_SIDE) {
-				bridge.nextTraveler = bridge.right_queue.front().carID;
+				nextTraveler = bridge.right_queue.front().carID;
 				bridge.right_queue.pop();
 			}
+			bridge.car_threads[nextTraveler - 1].waiting = false;
 		}
 	}
 
-	// Join up all completed threads
+	// Join up any running threads
 	while (!bridge.car_threads.empty()) {
-		(void) pthread_join(bridge.car_threads.back(), NULL);
+		(void) pthread_join(bridge.car_threads.back().car_function, NULL);
 		bridge.car_threads.pop_back();
 	}
-
-	system("pause");
 
 	return 0;
 }
