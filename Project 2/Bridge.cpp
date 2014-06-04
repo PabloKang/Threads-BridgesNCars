@@ -5,6 +5,7 @@
 *				Pablo Kang			(58842064)					*
 *****************************************************************/
 
+#include <stdlib.h>
 #include <string>
 #include <queue>
 #include <vector>
@@ -64,7 +65,7 @@ class Bridge
 {
 public:
 	int carCount;								// Number of cars in the input file.
-	unsigned int BRIDGE_CAPACITY = 3;			// Max cars the bridge can support at any given time.
+	unsigned int BRIDGE_CAPACITY;				// Max cars the bridge can support at any given time.
 
 	queue<vehicle> left_queue;					// Queue of vehicles waiting to cross bridge to the left side.
 	queue<vehicle> right_queue;					// Queue of vehicles waiting to cross bridge to the right side.
@@ -81,11 +82,11 @@ public:
 	// Deconstructor
 	~Bridge() {}
 
-	void bridgeScenario() 
+	void bridgeScenario()
 	{
 		if (!inFile){
 			cout << "ERROR >> File 'bridge.in' was not found or could not be opened.\n" <<
-					"         Unable to load data; exiting simulation...\n\n";
+				"         Unable to load data; exiting simulation...\n\n";
 			exit(0);
 		}
 		else {
@@ -135,7 +136,7 @@ void* OneVehicle(void* params){
 	ArriveBridge(p->carID, p->direction);
 	CrossBridge(p->carID, p->direction);
 	ExitBridge(p->carID, p->direction);
-	
+
 	return 0;
 }
 
@@ -146,12 +147,12 @@ void ArriveBridge(int id, int direc)
 	int index = 0;
 
 	pthread_mutex_lock(&LOCK);
-	outFile << "| o-> }= ={     | ARRIVAL  : Vehicle " << id << ", traveling in direction " << direc << ".\n";
+	outFile << "| o-> }= ={     | ARRIVAL  : Vehicle " << id << ", traveling in direction " << direc << endl;
 	pthread_mutex_unlock(&LOCK);
 
 	while (bridge.car_threads[id - 1].waiting){
 		pthread_mutex_lock(&LOCK);
-		outFile << "|   o }= ={     | WAITING  : Vehicle " << id << ", traveling in direction " << direc << ".\n";
+		outFile << "|   o }= ={     | WAITING  : Vehicle " << id << ", traveling in direction " << direc << endl;
 		pthread_mutex_unlock(&LOCK);
 	}
 }
@@ -164,7 +165,7 @@ void CrossBridge(int id, int direc)
 	pthread_mutex_lock(&LOCK);
 	bridge.bridge_queue.push(thisCar);
 	if (DEBUG)
-		outFile << "|     }=o={     | CROSSING : Vehicle " << id << ", traveling in direction " << direc << ".\n";
+		outFile << "|     }=o={     | CROSSING : Vehicle " << id << ", traveling in direction " << direc << endl;
 	pthread_mutex_unlock(&LOCK);
 }
 
@@ -173,7 +174,7 @@ void ExitBridge(int id, int direc)
 {
 	pthread_mutex_lock(&LOCK);
 	bridge.bridge_queue.pop();
-	outFile << "|     }= ={ o-> | DEPATRUE : Vehicle " << id << ", traveling in direction " << direc << ".\n";
+	outFile << "|     }= ={ o-> | DEPATRUE : Vehicle " << id << ", traveling in direction " << direc << endl;
 	pthread_mutex_unlock(&LOCK);
 }
 
@@ -184,7 +185,6 @@ void ExitBridge(int id, int direc)
 int main(int argc, const char * argv[])
 {
 	bool bridgePause = false;
-
 
 	bridge.bridgeScenario();
 	currentDirection = LEFT_SIDE;
@@ -209,7 +209,7 @@ int main(int argc, const char * argv[])
 		// If bridge has room in current direction.
 		if (bridge.bridge_queue.size() < bridge.BRIDGE_CAPACITY) {
 			int nextTraveler = 0;
-			
+
 			// Get carID of next available nextTraveler.
 			if (currentDirection == LEFT_SIDE) {
 				nextTraveler = bridge.left_queue.front().carID;
@@ -225,7 +225,7 @@ int main(int argc, const char * argv[])
 
 	// Join up any running threads
 	while (!bridge.car_threads.empty()) {
-		(void) pthread_join(bridge.car_threads.back().car_function, NULL);
+		(void)pthread_join(bridge.car_threads.back().car_function, NULL);
 		bridge.car_threads.pop_back();
 	}
 
